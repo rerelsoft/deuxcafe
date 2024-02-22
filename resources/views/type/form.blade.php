@@ -22,11 +22,26 @@
                           </div>
                       </div>
                       {{-- Kategori Id --}}
-                      <div class="form-group row">
+                      {{-- <div class="form-group row">
                         <label for="staticEmail" class="col-sm-4 col-form-label">Kategori Id</label>
                         <div class="col-sm-12">
                             <input type="number" class="form-control" id="kategori_id" name="kategori_id"
                                 placeholder="Kategori Id">
+                        </div>
+                    </div> --}}
+
+                     {{-- Kategori Id --}}
+                     <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-4 col-form-label">Kategori Id</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" name="kategori_id" id="kategori_id"
+                                placeholder="Kategori Id">
+                                <option value="">Pilih Kategori</option>
+                                @foreach ($kategori as $k)
+                                <option value="{{$k->id}}">{{$k->nama}}</option>
+                                    
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 

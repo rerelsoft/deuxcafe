@@ -1,22 +1,22 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'menu'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'kategori'])
     <div class="container-fluid py-4">
 
         <div class="row mt-4">
             <div class="container">
                 <div class="card">
-                    <h5 class="card-header">Menu Crud</h5>
+                    <h5 class="card-header">Kategori Crud</h5>
                     <div class="p-3 py-2">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormMenu">
-                            Tambah Menu
+                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormKategori">
+                            Tambah Kategori
                         </button>
                     </div>
 
-                    @include('menu.data')
+                    @include('kategori.data')
 
 
                 </div>
@@ -25,42 +25,33 @@
         </div>
 
     </div>
-@include('menu.form')
+    @include('kategori.form')
 
     @include('layouts.footers.auth.footer')
     </div>
+
 @endsection
 
 @push('js')
     <script>
-        $('#modalFormMenu').on('show.bs.modal', function(e) {
+        $('#modalFormKategori').on('show.bs.modal', function(e) {
             const btn = $(e.relatedTarget)
             console.log(btn.data('mode'))
             const mode = btn.data('mode')
-            const nama_menu = btn.data('nama_menu')
-            const harga = btn.data('harga')
-            const deskripsi = btn.data('deskripsi')
-            const type_id = btn.data('type_id')
+            const nama = btn.data('nama')
 
             const id = btn.data('id')
             const modal = $(this)
             if (mode === 'edit') {
-                modal.find('.modal-title').text('Edit Menu')
-                modal.find('#nama_menu').val(nama_menu)
-                modal.find('#harga').val(harga)
-                modal.find('#deskripsi').val(deskripsi)
-                modal.find('#type_id').val(type_id)
-
-                modal.find('.modal-body form').attr('action', '{{ url("menu") }}/' + id)
+                modal.find('.modal-title').text('Edit Kategori')
+                modal.find('#nama').val(nama)
+                modal.find('.modal-body form').attr('action', '{{ url("kategori") }}/' + id)
                 modal.find('#method').html('@method('PATCH')')
             } else {
-                modal.find('.modal-title').text('Input Menu')
-                modal.find('#nama_menu').val('')
-                modal.find('#harga').val('')
-                modal.find('#deskripsi').val('')
-                modal.find('#type_id').val('')
+                modal.find('.modal-title').text('Input Kategori')
+                modal.find('#nama_type').val('')
                 modal.find('#method').html('')
-                modal.find('.modal-body form').attr('action', '{{ url("menu") }}')
+                modal.find('.modal-body form').attr('action', '{{ url("kategori") }}')
             }
         })
 
@@ -85,7 +76,7 @@
     </script>
 
     <script>
-        $('#data-menu').DataTable();
+        $('#data-kategori').DataTable();
     </script>
     <script src="./assets/js/plugins/chartjs.min.js"></script>
     <script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Type;
+use App\Models\Kategori;
 use App\Http\Requests\StoreTypeRequest;
 use App\Http\Requests\UpdateTypeRequest;
 
@@ -14,10 +15,12 @@ class TypeController extends Controller
     public function index()
     {
         $data['type'] = Type::where('id', auth()->user()->id)->get();
-
+      
         $type = Type::all();
+        $kategori = Kategori::all();
 
-        return view('type.index', compact('type'));
+
+        return view('type.index', compact('type'), compact('kategori'));
     }
 
     /**
@@ -25,7 +28,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

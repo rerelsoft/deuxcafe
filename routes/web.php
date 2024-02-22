@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\PelangganController;
 
 
 
@@ -45,6 +48,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/type', TypeController::class);
 	Route::resource('menu', MenuController::class);
 	Route::resource('pemesanan', PemesananController::class);
+	Route::resource('kategori', KategoriController::class);
+	Route::resource('transaksi', TransaksiController::class);
+	Route::resource('pelanggan', PelangganController::class);
 
 
 

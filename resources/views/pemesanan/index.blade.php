@@ -2,39 +2,58 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'type'])
-
-
-        <div class="row mt-4 p-3">
-            <div class="container col-md-8">
-                <div class="card ">
-                    <h5 class="card-header">Type Crud</h5>
-                    <div class="p-3 py-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate sed at esse ut provident deserunt ipsa sunt mollitia unde nemo quidem culpa, tempore nam maxime voluptate repudiandae hic. Asperiores doloremque illo enim unde quae aspernatur praesentium quia dignissimos iste. Est earum, quod itaque odio iste omnis ipsam dolorum. Officiis, sequi illum, sit unde ullam illo quaerat repellat neque, pariatur placeat officia possimus voluptate expedita amet nam! Ea beatae obcaecati placeat quaerat natus necessitatibus ex porro impedit ducimus quae aliquid quia harum facere a architecto ab, non voluptas, explicabo nesciunt iure et, dicta distinctio? Laudantium temporibus, aperiam accusamus debitis excepturi provident.
+    <div class="row mt-4 p-3">
+        <div class="container col-md-8">
+            <div class="card item menu">
+                <h5 class="card-header">Menu</h5>
+                {{-- nama pelanggan --}}
+                <div class="p-4 form-group row">
+                    <h3 >Nama Pelanggan</h3>
+                    <div class="col-sm-5 ">
+                        <select class="form-control " name="nama" id="nama"
+                            placeholder="Pelanggan">
+                            <option value="">Pilih Pelanggan</option>
+                            @foreach ($pelanggan as $p)
+                            <option value="{{$p->id}}">{{$p->nama}}</option>
+                                
+                            @endforeach
+                        </select>
                     </div>
-
-                    {{-- @include('type.data') --}}
-
+                </div>
+                {{-- menu --}}
+                <div class="p-4">
+                    @foreach ($type as $t)
+                        <h3>{{ $t->nama_type }}</h3>
+                        <ul class="menu-item">
+                            @foreach ($t->menu as $menu)
+                                <li class="btn bg-gradient-warning" data-harga="{{ $menu->harga }}"
+                                    data-id="{{ $menu->id }}">{{ $menu->nama_menu }}</li>
+                            @endforeach
+                        </ul>
+                    @endforeach
+                    </ul>
                 </div>
             </div>
-            <div class="container col-md-4">
-                <div class="card ">
-                    <h5 class="card-header">Type Crud</h5>
-                    <div class="p-3 py-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate sed at esse ut provident deserunt ipsa sunt mollitia unde nemo quidem culpa, tempore nam maxime voluptate repudiandae hic. Asperiores doloremque illo enim unde quae aspernatur praesentium quia dignissimos iste. Est earum, quod itaque odio iste omnis ipsam dolorum. Officiis, sequi illum, sit unde ullam illo quaerat repellat neque, pariatur placeat officia possimus voluptate expedita amet nam! Ea beatae obcaecati placeat quaerat natus necessitatibus ex porro impedit ducimus quae aliquid quia harum facere a architecto ab, non voluptas, explicabo nesciunt iure et, dicta distinctio? Laudantium temporibus, aperiam accusamus debitis excepturi provident.
+        </div>
+        <div class="container col-md-4">
+            <div class="card item content">
+                <h5 class="card-header">Order</h5>
+                <div class="p-4">
+                    <ul class="ordered-list">
+
+                    </ul>
+                    <div>
+                        Total Bayar : <h2 id="total">0</h2>
                     </div>
-
-                    {{-- @include('type.data') --}}
-
+                    <div>
+                        <button id="btn-bayar" class="btn bg-gradient-info">Bayar</button>
+                    </div>
                 </div>
             </div>
-
         </div>
 
-       
-            
-        
-
     </div>
+
 
     @include('layouts.footers.auth.footer')
     </div>
@@ -43,53 +62,107 @@
 
 @push('js')
     <script>
-        $('#modalFormType').on('show.bs.modal', function(e) {
-            const btn = $(e.relatedTarget)
-            console.log(btn.data('mode'))
-            const mode = btn.data('mode')
-            const nama_type = btn.data('nama_type')
-            const kategori_id = btn.data('kategori_id')
+        $(function() {
+            // Inisialisasi
+            const orderedList = []
+            let total = 0
 
-            const id = btn.data('id')
-            const modal = $(this)
-            if (mode === 'edit') {
-                modal.find('.modal-title').text('Edit Type')
-                modal.find('#nama_type').val(nama_type)
-                modal.find('#kategori_id').val(kategori_id)
-                modal.find('.modal-body form').attr('action', '{{ url('type') }}/' + id)
-                modal.find('#method').html('@method('PATCH')')
-            } else {
-                modal.find('.modal-title').text('Input Type')
-                modal.find('#nama_type').val('')
-                modal.find('#kategori_id').val('')
-                modal.find('#method').html('')
-                modal.find('.modal-body form').attr('action', '{{ url('type') }}')
-            }
-        })
+            const sum = () => {
+                return orderedList.reduce((accumulator, object) => {
+                    return accumulator + (object.harga * object.qty);
+                }, 0)
+            };
 
-        $('.delete-data').on('click', function(e) {
-            e.preventDefault()
-            const data = $(this).closest('tr').find('td:eq(1)').text()
-            Swal.fire({
-                title: `Apakah data <span style="color:#3085d6">${data}</span> akan dihapus?`,
-                icon: "question",
-                iconHtml: "؟",
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: "نعم",
-                cancelButtonText: "لا",
-                showCancelButton: true,
-                showCloseButton: true
-            }).then((result) => {
-                if (result.isConfirmed)
-                    $(e.target).closest('form').submit()
-                else swal.close()
+            const changeQty = (el, inc) => {
+                // Ubah di array
+                const id = $(el).closest('li')[0].dataset.id;
+                const index = orderedList.findIndex(list => list.id == id)
+                orderedList[index].qty += orderedList[index].qty == 1 && inc == -1 ? 0 : inc
+
+                // Ubah qty dan ubah subtotal
+                const txt_subtotal = $(el).closest('li').find('.subtotal')[0];
+                const txt_qty = $(el).closest('li').find('.qty-item')[0]
+                txt_qty.value = parseInt(txt_qty.value) == 1 && inc == -1 ? 1 : parseInt(txt_qty.value) + inc
+                txt_subtotal.innerHTML = orderedList[index].harga * orderedList[index].qty;
+
+                // Ubah jumlah total
+                $('#total').html(sum());
+            };
+
+
+            // Events
+            $('.ordered-list').on('click', '.btn-dec', function() {
+                changeQty(this, -1)
+            });
+
+            $('.ordered-list').on('click', '.btn-inc', function() {
+                changeQty(this, 1)
+            });
+
+            $('.ordered-list').on('click', '.remove-item', function() {
+                const item = $(this).closest('li')[0];
+                let index = orderedList.findIndex(list => list.id == parseInt(item.dataset.id))
+                orderedList.splice(index, 1)
+                $(item).remove();
+                $('#total').html(sum());
+            });
+
+            $('#btn-bayar').on('click', function() {
+                $.ajax({
+                    url: "{{ route('transaksi.store') }}",
+                    method: "POST",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        orderedList: orderedList,
+                        total: total
+                    },
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
+            });
+
+
+            $(".menu-item li").click(function() {
+                // mengambil data
+                const menu_clicked = $(this).text();
+                const data = $(this)[0].dataset;
+                const harga = parseFloat(data.harga);
+                const id = parseInt(data.id);
+
+                if (orderedList.every(list => list.id !== id)) {
+                    let dataN = {
+                        'id': id,
+                        'menu': menu_clicked,
+                        'harga': harga,
+                        'qty': 1
+                    }
+                    orderedList.push(dataN);
+
+                    let listOrder = `<li data-id="${id}"><h3> ${menu_clicked} </h3>`
+                    listOrder += `<div>Sub Total : Rp.  ${harga}</div>`
+                    listOrder +=
+                        `<button class="px-2 py-1 rounded text-white  bg-gradient-danger remove-item" style="font-size: 12px; outline: none; border: none"> Hapus </button>
+                                <button class="px-2 py-1 rounded text-white bg-warning btn-dec" style="font-size: 12px; outline: none; border: none"> kurang </button>`
+                    listOrder += `<input class="qty-item" 
+                                type="number"   
+                                value="1"               
+                                style="width:30px; font-size: 14px; outline: none; border: none;" 
+                                readonly>
+                               
+                        <button class="px-2 py-1 rounded text-white bg-default btn-inc" style="font-size: 12px; outline: none; border: none"> Tambah </button><h2>
+                        <span class="subtotal">${harga * 1}</span>
+                        </li>`
+                    $('.ordered-list').append(listOrder)
+                }
+                $('total').html(sum())
             })
-        })
+        });
     </script>
 
-    <script>
+    {{-- <script>
         $('#data-type').DataTable();
-    </script>
+    </script> --}}
     <script src="./assets/js/plugins/chartjs.min.js"></script>
     <script>
         var ctx1 = document.getElementById("chart-line").getContext("2d");

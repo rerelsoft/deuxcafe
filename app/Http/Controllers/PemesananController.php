@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Pemesanan;
 use App\Http\Requests\StorePemesananRequest;
 use App\Http\Requests\UpdatePemesananRequest;
+use App\Models\Type;
+use App\Models\Pelanggan;
 
 class PemesananController extends Controller
 {
@@ -13,7 +15,12 @@ class PemesananController extends Controller
      */
     public function index()
     {
-        return view('pemesanan.index');
+        $data['type'] = Type::with(['menu'])->get();
+        // dd($data['type']);
+
+        $pelanggan = Pelanggan::all();
+
+        return view('pemesanan.index', compact('pelanggan'))->with($data);
     }
 
     /**

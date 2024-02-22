@@ -1,22 +1,22 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'menu'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'pelanggan'])
     <div class="container-fluid py-4">
 
         <div class="row mt-4">
             <div class="container">
                 <div class="card">
-                    <h5 class="card-header">Menu Crud</h5>
+                    <h5 class="card-header">Type Crud</h5>
                     <div class="p-3 py-2">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormMenu">
-                            Tambah Menu
+                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormPelanggan">
+                            Tambah Pelanggan
                         </button>
                     </div>
 
-                    @include('menu.data')
+                    @include('pelanggan.data')
 
 
                 </div>
@@ -25,42 +25,43 @@
         </div>
 
     </div>
-@include('menu.form')
+    @include('pelanggan.form')
 
     @include('layouts.footers.auth.footer')
     </div>
+
 @endsection
 
 @push('js')
     <script>
-        $('#modalFormMenu').on('show.bs.modal', function(e) {
+        $('#modalFormPelanggan').on('show.bs.modal', function(e) {
             const btn = $(e.relatedTarget)
             console.log(btn.data('mode'))
             const mode = btn.data('mode')
-            const nama_menu = btn.data('nama_menu')
-            const harga = btn.data('harga')
-            const deskripsi = btn.data('deskripsi')
-            const type_id = btn.data('type_id')
+            const nama = btn.data('nama')
+            const email = btn.data('email')
+            const nomor_telepon = btn.data('nomor_telepon')
+            const alamat = btn.data('alamat')
 
             const id = btn.data('id')
             const modal = $(this)
             if (mode === 'edit') {
-                modal.find('.modal-title').text('Edit Menu')
-                modal.find('#nama_menu').val(nama_menu)
-                modal.find('#harga').val(harga)
-                modal.find('#deskripsi').val(deskripsi)
-                modal.find('#type_id').val(type_id)
+                modal.find('.modal-title').text('Edit Pelanggan')
+                modal.find('#nama').val(nama)
+                modal.find('#email').val(email)
+                modal.find('#nomor_telepon').val(nomor_telepon)
+                modal.find('#alamat').val(alamat)
 
-                modal.find('.modal-body form').attr('action', '{{ url("menu") }}/' + id)
+                modal.find('.modal-body form').attr('action', '{{ url("pelanggan") }}/' + id)
                 modal.find('#method').html('@method('PATCH')')
             } else {
-                modal.find('.modal-title').text('Input Menu')
-                modal.find('#nama_menu').val('')
-                modal.find('#harga').val('')
-                modal.find('#deskripsi').val('')
-                modal.find('#type_id').val('')
+                modal.find('.modal-title').text('Input Pelanggan')
+                modal.find('#nama').val('')
+                modal.find('#email').val('')
+                modal.find('#nomor_telepon').val('')
+                modal.find('#alamat').val('')
                 modal.find('#method').html('')
-                modal.find('.modal-body form').attr('action', '{{ url("menu") }}')
+                modal.find('.modal-body form').attr('action', '{{ url("pelanggan") }}')
             }
         })
 
@@ -85,7 +86,7 @@
     </script>
 
     <script>
-        $('#data-menu').DataTable();
+        $('#data-pelanggan').DataTable();
     </script>
     <script src="./assets/js/plugins/chartjs.min.js"></script>
     <script>

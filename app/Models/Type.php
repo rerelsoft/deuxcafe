@@ -11,4 +11,8 @@ class Type extends Model
 
     protected $table = 'type';
     protected $fillable = ['nama_type', 'kategori_id'];
+
+    public function menu() {
+        return $this->hasMany(Menu::class, 'type_id', 'id');
+    }
 }

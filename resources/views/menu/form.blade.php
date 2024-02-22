@@ -38,11 +38,25 @@
                         </div>
                     </div>
                      {{-- Jenis Id --}}
-                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-4 col-form-label">Jenis Id</label>
+                     {{-- <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-4 col-form-label">Type Id</label>
                         <div class="col-sm-12">
-                            <input type="number" class="form-control" id="jenis_id" name="jenis_id"
-                                placeholder="Jenis Id">
+                            <input type="number" class="form-control" id="type_id" name="type_id"
+                                placeholder="Type Id">
+                        </div>
+                    </div> --}}
+
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-4 col-form-label">Type Id</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" name="type_id" id="type_id"
+                                placeholder="Kategori Id">
+                                <option value="">Pilih Type</option>
+                                @foreach ($type as $t)
+                                <option value="{{$t->id}}">{{$t->nama_type}}</option>
+                                    
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 

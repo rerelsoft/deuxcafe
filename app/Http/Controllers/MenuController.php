@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Type;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 
@@ -16,8 +17,9 @@ class MenuController extends Controller
         $data['menu'] = Menu::where('id', auth()->user()->id)->get();
 
         $menu = Menu::all();
+        $type = Type::all();
 
-        return view('menu.index', compact('menu'));
+        return view('menu.index', compact('menu'), compact('type'));
     }
 
     /**

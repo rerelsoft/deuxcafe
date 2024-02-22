@@ -7,7 +7,7 @@
             <th scope="col" class="p-2">Nama Menu</th>
             <th scope="col" class="p-2">Harga</th>
             <th scope="col" class="p-2">Deskripsi</th>
-            <th scope="col" class="p-2">Jenis Id</th>
+            <th scope="col" class="p-2">Type Id</th>
             <th scope="col" class="p-2">Tools</th>
           </tr>
         </thead>
@@ -20,7 +20,7 @@
             <td>{{$m->nama_menu}}</td>
             <td>{{$m->harga}}</td>
             <td>{{$m->deskripsi}}</td>
-            <td>{{$m->jenis_id}}</td>
+            <td>{{$m->type_id}}</td>
             <td>
             {{-- ########### edit ########## --}}
               <button class="btn bg-gradient-success"data-bs-toggle="modal" data-bs-target="#modalFormMenu" data-mode="edit" 
@@ -28,7 +28,7 @@
               data-nama_menu="{{ $m->nama_menu }}"
               data-harga="{{ $m->harga }}"
               data-deskripsi="{{ $m->deskripsi }}"
-              data-jenis_id="{{ $m->jenis_id }}"
+              data-type_id="{{ $m->type_id }}"
               >
             <i class="fas fa-edit"></i>
             </button>

@@ -25,10 +25,12 @@
         </div>
 
     </div>
+    @include('type.form')
+
     @include('layouts.footers.auth.footer')
     </div>
+
 @endsection
-@include('type.form')
 
 @push('js')
     <script>

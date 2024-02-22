@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
-use App\Http\Requests\StoreTransaksiRequest;
-use App\Http\Requests\UpdateTransaksiRequest;
+use App\Http\Requests\TransaksiRequest;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
 {
@@ -27,9 +27,30 @@ class TransaksiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTransaksiRequest $request)
+    public function store(TransaksiRequest $request)
     {
-        //
+        try {
+            // DB::beginTransaction();
+            
+                    $last_id = Transaksi::where('tanggal', date('Y-m-d'))->orderBy('tanggal', 'desc')->select('id')->first();
+                    $notrans = $last_id == null ? date('Ymd').'0001' : date('Ymd').sprintf('%04d', substr($last_id,8,4));
+            
+                    $insertTransaksi = Transaksi::create([
+                        'id' => $notrans,
+                        'tanggal' => date('Y-m-d'),
+                        'total_harga' => $request->total,
+                        'metode_pembayaran' => 'cash',
+                        'keterangan' => '',
+                    ]);
+
+
+
+        } catch (Exception $e) {
+           return $e;
+           Db::rollback();
+        }
+        return $insertTransaksi;
+
     }
 
     /**
@@ -51,7 +72,7 @@ class TransaksiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTransaksiRequest $request, Transaksi $transaksi)
+    public function update(TransaksiRequest $request, Transaksi $transaksi)
     {
         //
     }

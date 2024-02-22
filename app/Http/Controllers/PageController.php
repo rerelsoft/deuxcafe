@@ -32,6 +32,18 @@ class PageController extends Controller
         return view("menu.index", compact('menu'));
     }
 
+    public function kategori()
+    {
+        $kategori = [];
+        return view("kategori.index", compact('kategori'));
+    }
+
+    public function pelanggan()
+    {
+        $pelanggan = [];
+        return view("pelanggan.index", compact('pelanggan'));
+    }
+
     public function pemesanan()
     {
         $pemesanan = [];
