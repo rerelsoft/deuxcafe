@@ -15,4 +15,8 @@ class Type extends Model
     public function menu() {
         return $this->hasMany(Menu::class, 'type_id', 'id');
     }
+
+    public function kategori() {
+        return $this->belongsTo(Kategori::class, 'id');
+    }
 }

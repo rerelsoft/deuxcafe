@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Transaksi;
 use App\Http\Requests\TransaksiRequest;
 use Illuminate\Support\Facades\DB;
+use Exception;
+use Illuminate\Database\QueryException;
+use PDOException;
 
 class TransaksiController extends Controller
 {
@@ -30,7 +33,6 @@ class TransaksiController extends Controller
     public function store(TransaksiRequest $request)
     {
         try {
-            // DB::beginTransaction();
             
                     $last_id = Transaksi::where('tanggal', date('Y-m-d'))->orderBy('tanggal', 'desc')->select('id')->first();
                     $notrans = $last_id == null ? date('Ymd').'0001' : date('Ymd').sprintf('%04d', substr($last_id,8,4));
@@ -45,7 +47,7 @@ class TransaksiController extends Controller
 
 
 
-        } catch (Exception $e) {
+        } catch (Exception | QueryException | PDOException $e) {
            return $e;
            Db::rollback();
         }

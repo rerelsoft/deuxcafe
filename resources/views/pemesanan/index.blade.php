@@ -46,7 +46,7 @@
                         Total Bayar : <h2 id="total">0</h2>
                     </div>
                     <div>
-                        <button id="btn-bayar" class="btn bg-gradient-info">Bayar</button>
+                        <button id="btn-bayar" type="submit" class="btn bg-gradient-info">Bayar</button>
                     </div>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                     data: {
                         "_token": "{{ csrf_token() }}",
                         orderedList: orderedList,
-                        total: total
+                        total: sum()
                     },
                     success: function(data) {
                         console.log(data);
@@ -151,11 +151,11 @@
                                 readonly>
                                
                         <button class="px-2 py-1 rounded text-white bg-default btn-inc" style="font-size: 12px; outline: none; border: none"> Tambah </button><h2>
-                        <span class="subtotal">${harga * 1}</span>
+                        <span class="subtotal">${harga*1}</span>
                         </li>`
                     $('.ordered-list').append(listOrder)
                 }
-                $('total').html(sum())
+                $('#total').html(sum())
             })
         });
     </script>
