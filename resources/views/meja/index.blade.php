@@ -1,22 +1,22 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'stok'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'meja'])
     <div class="container-fluid py-4">
 
         <div class="row mt-4">
             <div class="container">
                 <div class="card">
-                    <h5 class="card-header">Stok Crud</h5>
+                    <h5 class="card-header">Meja Crud</h5>
                     <div class="p-3 py-2">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormStok">
-                            Tambah Stok
+                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormMeja">
+                            Tambah Meja
                         </button>
                     </div>
 
-                    @include('stok.data')
+                    @include('meja.data')
 
 
                 </div>
@@ -25,40 +25,39 @@
         </div>
 
     </div>
-    @include('stok.form')
+@include('meja.form')
 
     @include('layouts.footers.auth.footer')
     </div>
-
 @endsection
 
 @push('js')
     <script>
-        $('#modalFormStok').on('show.bs.modal', function(e) {
+        $('#modalFormMeja').on('show.bs.modal', function(e) {
             const btn = $(e.relatedTarget)
             console.log(btn.data('mode'))
             const mode = btn.data('mode')
-            const menu_id = btn.data('menu_id')
-            const jumlah = btn.data('jumlah')
-           
+            const nomor_meja = btn.data('nomor_meja')
+            const kapasitas = btn.data('kapasitas')
+            const status = btn.data('status')
 
             const id = btn.data('id')
             const modal = $(this)
             if (mode === 'edit') {
-                modal.find('.modal-title').text('Edit Stok')
-                modal.find('#menu_id').val(menu_id)
-                modal.find('#jumlah').val(jumlah)
-               
+                modal.find('.modal-title').text('Edit Meja')
+                modal.find('#nomor_meja').val(nomor_meja)
+                modal.find('#kapasitas').val(kapasitas)
+                modal.find('#status').val(status)
 
-                modal.find('.modal-body form').attr('action', '{{ url("stok") }}/' + id)
+                modal.find('.modal-body form').attr('action', '{{ url("meja") }}/' + id)
                 modal.find('#method').html('@method('PATCH')')
             } else {
-                modal.find('.modal-title').text('Input Stok')
-                modal.find('#menu_id').val('')
-                modal.find('#jumlah').val('')
-              
+                modal.find('.modal-title').text('Input Meja')
+                modal.find('#nomor_meja').val('')
+                modal.find('#kapasitas').val('')
+                modal.find('#status').val('')
                 modal.find('#method').html('')
-                modal.find('.modal-body form').attr('action', '{{ url("stok") }}')
+                modal.find('.modal-body form').attr('action', '{{ url("meja") }}')
             }
         })
 
@@ -83,7 +82,7 @@
     </script>
 
     <script>
-        $('#data-stok').DataTable();
+        $('#data-meja').DataTable();
     </script>
     <script src="./assets/js/plugins/chartjs.min.js"></script>
     <script>

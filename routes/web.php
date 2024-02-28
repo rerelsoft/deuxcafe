@@ -7,6 +7,8 @@ use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\StokController;
+use App\Http\Controllers\MejaController;
 
 
 
@@ -51,6 +53,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('kategori', KategoriController::class);
 	Route::resource('transaksi', TransaksiController::class);
 	Route::resource('pelanggan', PelangganController::class);
+	Route::resource('stok', StokController::class);
+	Route::resource('meja', MejaController::class);
+	Route::get('nota/{nofaktur}', [TransaksiController::class, 'faktur']);
 
 
 

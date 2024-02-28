@@ -1,44 +1,40 @@
 <div class="container">
 
-<table class="table" id="data-pelanggan">
+<table class="table" id="data-stok">
     <thead class="thead-dark">
       <tr>
         <th scope="col" class="p-2">No</th>
-        <th scope="col" class="p-2">Nama</th>
-        <th scope="col" class="p-2">Email</th>
-        <th scope="col" class="p-2">Nomor Telepon</th>
-        <th scope="col" class="p-2">Alamat</th>
+        <th scope="col" class="p-2">Menu Id</th>
+        <th scope="col" class="p-2">Jumlah</th>
         <th scope="col" class="p-2">Tools</th>
       </tr>
     </thead>
     <tbody>
       
 
-      @foreach ($pelanggan as $p)
+      @foreach ($stok as $s)
       <tr>
         <td>{{$i = !isset($i)?$i=1:++$i}}</td>
-        <td>{{$p->nama}}</td>
-        <td>{{$p->email}}</td>
-        <td>{{$p->nomor_telepon}}</td>
-        <td>{{$p->alamat}}</td>
+        <td>{{$s->menu_id}}</td>
+        <td>{{$s->jumlah}}</td>
+      
         <td>
         {{-- ########### edit ########## --}}
-          <button class="btn bg-gradient-success"data-bs-toggle="modal" data-bs-target="#modalFormPelanggan" data-mode="edit" 
-          data-id="{{ $p -> id }}"
-          data-nama="{{ $p->nama }}"
-          data-email="{{ $p->email }}"
-          data-nomor_telepon="{{ $p->nomor_telepon }}"
-          data-alamat="{{ $p->alamat }}"
+          <button class="btn bg-gradient-success"data-bs-toggle="modal" data-bs-target="#modalFormStok" data-mode="edit" 
+          data-id="{{ $s -> id }}"
+          data-menu_id="{{ $s->menu_id }}"
+          data-jumlah="{{ $s->jumlah }}"
+         
           >
         <i class="fas fa-edit"></i>
         </button>
         {{-- ########### delete ########## --}}
           <form method="post"
-          action="{{ route('pelanggan.destroy', $p->id) }}" style="display: inline">
+          action="{{ route('stok.destroy', $s->id) }}" style="display: inline">
         @csrf
         @method('DELETE')
         <button type="button" class="btn bg-gradient-danger delete-data"
-        data-nama="{{ $p->nama }}">
+        data-menu_id="{{ $s->menu_id }}">
         <i class="fas fa-trash"></i>
         </button>
         </form>

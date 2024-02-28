@@ -55,6 +55,12 @@ class TransaksiController extends Controller
 
     }
 
+    public function faktur($nofaktur) {
+        $data = Transaksi::where('id', $nofaktur)->with(['detailTransaksi'])->first();
+
+        dd($data);
+    }
+
     /**
      * Display the specified resource.
      */

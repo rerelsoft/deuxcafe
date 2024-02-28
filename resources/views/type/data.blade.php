@@ -16,7 +16,7 @@
       <tr>
         <td>{{$i = !isset($i)?$i=1:++$i}}</td>
         <td>{{$t->nama_type}}</td>
-        <td>{{$t->kategori_id}}</td>
+        <td>{{$t->kategori->nama}}</td>
         <td>
         {{-- ########### edit ########## --}}
           <button class="btn bg-gradient-success"data-bs-toggle="modal" data-bs-target="#modalFormType" data-mode="edit" 

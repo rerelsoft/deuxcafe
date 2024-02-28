@@ -1,21 +1,19 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'type'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'pemesanan'])
     <div class="row mt-4 p-3">
         <div class="container col-md-8">
             <div class="card item menu">
                 <h5 class="card-header">Menu</h5>
                 {{-- nama pelanggan --}}
                 <div class="p-4 form-group row">
-                    <h3 >Nama Pelanggan</h3>
+                    <h3>Nama Pelanggan</h3>
                     <div class="col-sm-5 ">
-                        <select class="form-control " name="nama" id="nama"
-                            placeholder="Pelanggan">
+                        <select class="form-control " name="nama" id="nama" placeholder="Pelanggan">
                             <option value="">Pilih Pelanggan</option>
                             @foreach ($pelanggan as $p)
-                            <option value="{{$p->id}}">{{$p->nama}}</option>
-                                
+                                <option value="{{ $p->id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -117,7 +115,22 @@
                         total: sum()
                     },
                     success: function(data) {
-                        console.log(data);
+                        console.log(data)
+                        Swal.fire({
+                            title: 'sudah benar semua',
+                            showDenyButton: true,
+                            confirmButtonText: "Cetak Nota",
+                            denyButtonText: `Okay`
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                Swal.fire("Saved!", "", "success")
+                                location.reload();
+                            } else if (result.isDenied) {
+                                Swal.fire("Selesai", "", "success")
+                                location.reload();
+                            }
+                        });
                     }
                 });
             });
@@ -142,15 +155,15 @@
                     let listOrder = `<li data-id="${id}"><h3> ${menu_clicked} </h3>`
                     listOrder += `<div>Sub Total : Rp.  ${harga}</div>`
                     listOrder +=
-                        `<button class="px-2 py-1 rounded text-white  bg-gradient-danger remove-item" style="font-size: 12px; outline: none; border: none"> Hapus </button>
-                                <button class="px-2 py-1 rounded text-white bg-warning btn-dec" style="font-size: 12px; outline: none; border: none"> kurang </button>`
+                        `<button class="px-2 py-1 rounded text-white  bg-gradient-danger remove-item" style="font-size: 12px; outline: none; border: none"> <i class="fas fa-trash"></i>  </button>
+                                <button class="px-2 py-1 rounded text-white bg-danger btn-dec" style="font-size: 12px; outline: none; border: none"> <i class="fas fa-minus"></i> </button>`
                     listOrder += `<input class="qty-item" 
                                 type="number"   
                                 value="1"               
                                 style="width:30px; font-size: 14px; outline: none; border: none;" 
                                 readonly>
                                
-                        <button class="px-2 py-1 rounded text-white bg-default btn-inc" style="font-size: 12px; outline: none; border: none"> Tambah </button><h2>
+                        <button class="px-2 py-1 rounded text-white bg-success btn-inc" style="font-size: 12px; outline: none; border: none"> <i class="fas fa-plus"></i> </button><h2>
                         <span class="subtotal">${harga*1}</span>
                         </li>`
                     $('.ordered-list').append(listOrder)

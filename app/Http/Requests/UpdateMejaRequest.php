@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateStokRequest extends FormRequest
+class UpdateMejaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,17 @@ class UpdateStokRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'menu_id' => 'required',
-            'jumlah' => 'required'
-            
+            'nomor_meja' => 'required',
+            'kapasitas' => 'required',
+            'status' => 'required',
         ];
     }
     public function messages()
     {
         return [
-            'menu_id.required' => 'Data menu produk belum diisi!',
-            'jumlah.required' => 'Data jumlah produk belum diisi!',
+            'nomor_meja.required' => 'Data nama produk belum diisi!',
+            'kapasitas.required' => 'Data nama produk belum diisi!',
+            'status.required' => 'Data nama produk belum diisi!'           
         ];
     }
 }

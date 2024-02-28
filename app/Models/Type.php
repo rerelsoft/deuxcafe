@@ -17,6 +17,6 @@ class Type extends Model
     }
 
     public function kategori() {
-        return $this->belongsTo(Kategori::class, 'id');
+        return $this->belongsTo(Kategori::class);
     }
 }

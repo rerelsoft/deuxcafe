@@ -11,7 +11,7 @@ class StoreStokRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,18 @@ class StoreStokRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'menu_id' => 'required',
+            'jumlah' => 'required'
+            
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'menu_id.required' => 'Data menu produk belum diisi!',
+            'jumlah.required' => 'Data jumlah produk belum diisi!',
+            
+           
         ];
     }
 }
