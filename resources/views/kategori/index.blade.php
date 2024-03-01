@@ -12,8 +12,19 @@
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormKategori">
-                            Tambah Kategori
+                          <i class="fa fa-plus"></i> Tambah Kategori
                         </button>
+
+                          <!-- Button Export -->
+                          <a href="{{ route('export-kategori') }}" class="btn bg-success text-white">
+                          <i class="fa fa-file-excel"></i>  Export
+                          </a>
+
+                           <!-- Button Import -->
+                        <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#formImport">
+                            <i class="fa fa-file-excel"></i> Import
+                          </button>
+
                     </div>
 
                     @include('kategori.data')

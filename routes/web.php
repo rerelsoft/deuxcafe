@@ -57,7 +57,24 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('meja', MejaController::class);
 	Route::get('nota/{nofaktur}', [TransaksiController::class, 'faktur']);
 
+	// export and import kategori
+	Route::get('export/kategori', [KategoriController::class, 'exportData'])->name('export-kategori');
+	Route::post('uploadkategori', [KategoriController::class, 'upload']);
 
+	// export and import type
+	Route::get('export/type', [TypeController::class, 'exportData'])->name('export-type');
+
+	// export and import menu
+	Route::get('export/menu', [MenuController::class, 'exportData'])->name('export-menu');
+
+	// export and import stok
+	Route::get('export/stok', [StokController::class, 'exportData'])->name('export-stok');
+
+	// export and import pelanggan
+	Route::get('export/pelanggan', [PelangganController::class, 'exportData'])->name('export-pelanggan');
+
+	// export and import meja
+	Route::get('export/meja', [MejaController::class, 'exportData'])->name('export-meja');
 
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');

@@ -7,13 +7,19 @@
         <div class="row mt-4">
             <div class="container">
                 <div class="card">
-                    <h5 class="card-header">Type Crud</h5>
+                    <h5 class="card-header">Pelanggan Crud</h5>
                     <div class="p-3 py-2">
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormPelanggan">
                             Tambah Pelanggan
                         </button>
+
+                         <!-- Button Export -->
+                         <a href="{{ route('export-pelanggan') }}" class="btn bg-success text-white">
+                            <i class="fa fa-file-excel"></i>  Export
+                        </a>
+
                     </div>
 
                     @include('pelanggan.data')

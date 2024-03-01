@@ -124,13 +124,17 @@
                         }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
-                                Swal.fire("Saved!", "", "success")
+                                window.open("{{url('nota/2343423')}}")
                                 location.reload();
                             } else if (result.isDenied) {
                                 Swal.fire("Selesai", "", "success")
                                 location.reload();
                             }
                         });
+                    },
+                    error: function(request, status, error) {
+                        console.log(status, error)
+                        Swal.fire('pemesanan gagal')
                     }
                 });
             });

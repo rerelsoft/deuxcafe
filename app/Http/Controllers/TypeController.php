@@ -7,6 +7,11 @@ use App\Models\Kategori;
 use App\Http\Requests\StoreTypeRequest;
 use App\Http\Requests\UpdateTypeRequest;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TypeExport;
+
+use Illuminate\Http\Request;
+
 class TypeController extends Controller
 {
     /**
@@ -85,5 +90,10 @@ class TypeController extends Controller
         $type->delete();
 
         return redirect('type') -> with('success', 'Delete data berhasil!');
+    }
+
+    public function exportData(){
+        $filename = date('Y-m-d').'_type.xlsx';
+        return Excel::download(new TypeExport, $filename);
     }
 }

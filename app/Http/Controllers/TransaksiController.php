@@ -33,25 +33,25 @@ class TransaksiController extends Controller
     public function store(TransaksiRequest $request)
     {
         try {
-            
-                    $last_id = Transaksi::where('tanggal', date('Y-m-d'))->orderBy('tanggal', 'desc')->select('id')->first();
-                    $notrans = $last_id == null ? date('Ymd').'0001' : date('Ymd').sprintf('%04d', substr($last_id,8,4));
-            
-                    $insertTransaksi = Transaksi::create([
-                        'id' => $notrans,
-                        'tanggal' => date('Y-m-d'),
-                        'total_harga' => $request->total,
-                        'metode_pembayaran' => 'cash',
-                        'keterangan' => '',
-                    ]);
-
-
-
+            $datePrefix = date('Ymd');
+            $lastTransaction = Transaksi::where('id', 'like', $datePrefix.'%')->orderBy('id', 'desc')->first();
+            $lastIdNumber = $lastTransaction ? intval(substr($lastTransaction->id, 8)) : 0;
+            $newIdNumber = $lastIdNumber + 1;
+            $notrans = $datePrefix . sprintf('%04d', $newIdNumber);
+        
+            $insertTransaksi = Transaksi::create([
+                'id' => $notrans,
+                'tanggal' => date('Y-m-d'),
+                'total_harga' => $request->total,
+                'metode_pembayaran' => 'cash',
+                'keterangan' => '',
+            ]);
         } catch (Exception | QueryException | PDOException $e) {
-           return $e;
-           Db::rollback();
+            return $e; // Note: Returning $e directly might not be a good practice for production environments due to security concerns.
+            // Db::rollback(); // This line will not execute due to the return statement above it.
         }
         return $insertTransaksi;
+        
 
     }
 

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Meja;
 use App\Http\Requests\StoreMejaRequest;
 use App\Http\Requests\UpdateMejaRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MejaExport;
+
+use Illuminate\Http\Request;
 
 class MejaController extends Controller
 {
@@ -75,5 +79,10 @@ class MejaController extends Controller
         $meja->delete();
 
         return redirect('meja') -> with('success', 'Delete data berhasil!');
+    }
+
+    public function exportData(){
+        $filename = date('Y-m-d').'_meja.xlsx';
+        return Excel::download(new MejaExport, $filename);
     }
 }

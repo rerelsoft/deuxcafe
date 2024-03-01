@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Stok;
 use App\Http\Requests\StoreStokRequest;
 use App\Http\Requests\UpdateStokRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StokExport;
+
+use Illuminate\Http\Request;
 
 class StokController extends Controller
 {
@@ -77,5 +81,10 @@ class StokController extends Controller
         $stok->delete();
 
         return redirect('stok') -> with('success', 'Delete data berhasil!');
+    }
+
+    public function exportData(){
+        $filename = date('Y-m-d').'_stok.xlsx';
+        return Excel::download(new StokExport, $filename);
     }
 }

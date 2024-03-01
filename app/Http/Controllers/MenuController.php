@@ -6,6 +6,10 @@ use App\Models\Menu;
 use App\Models\Type;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MenuExport;
+
+use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
@@ -77,5 +81,10 @@ class MenuController extends Controller
         $menu->delete();
 
         return redirect('menu') -> with('success', 'Delete data berhasil!');
+    }
+
+    public function exportData(){
+        $filename = date('Y-m-d').'_menu.xlsx';
+        return Excel::download(new MenuExport, $filename);
     }
 }

@@ -14,6 +14,12 @@
                         <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormMeja">
                             Tambah Meja
                         </button>
+
+                        <!-- Button Export -->
+                        <a href="{{ route('export-meja') }}" class="btn bg-success text-white">
+                            <i class="fa fa-file-excel"></i>  Export
+                        </a>
+                        
                     </div>
 
                     @include('meja.data')
