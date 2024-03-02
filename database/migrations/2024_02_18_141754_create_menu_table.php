@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('nama_menu');
             $table->integer('harga');
             $table->string('deskripsi');
-            $table->integer('type_id');
+            $table->unsignedBigInteger('type_id');
+            $table->foreign('type_id')->references('id')->on('type')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

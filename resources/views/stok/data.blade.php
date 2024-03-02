@@ -15,7 +15,7 @@
       @foreach ($stok as $s)
       <tr>
         <td>{{$i = !isset($i)?$i=1:++$i}}</td>
-        <td>{{$s->menu_id}}</td>
+        <td>{{$s->menu->nama_menu}}</td>
         <td>{{$s->jumlah}}</td>
       
         <td>

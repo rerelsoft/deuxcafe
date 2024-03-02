@@ -11,7 +11,7 @@ class StoreDetailTransaksiRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class StoreDetailTransaksiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'transaksi_id' => 'required',
+            'menu_id' => 'required',
+            'jumlah' => 'required',
+            'subtotal' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'transaksi_id.required' => 'Data belum diisi!',
+            'menu_id.required' => 'Data belum diisi!',
+            'jumlah.required' => 'Data belum diisi!',
+            'subtotal.required' => 'Data belum diisi!',
         ];
     }
 }

@@ -45,7 +45,7 @@
                                 placeholder="Type Id">
                         </div>
                     </div> --}}
-
+                    
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-4 col-form-label">Type Id</label>
                         <div class="col-sm-12">

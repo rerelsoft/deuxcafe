@@ -74,7 +74,7 @@
             const changeQty = (el, inc) => {
                 // Ubah di array
                 const id = $(el).closest('li')[0].dataset.id;
-                const index = orderedList.findIndex(list => list.id == id)
+                const index = orderedList.findIndex(list => list.menu_id == id)
                 orderedList[index].qty += orderedList[index].qty == 1 && inc == -1 ? 0 : inc
 
                 // Ubah qty dan ubah subtotal
@@ -122,9 +122,8 @@
                             confirmButtonText: "Cetak Nota",
                             denyButtonText: `Okay`
                         }).then((result) => {
-                            /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
-                                window.open("{{url('nota/2343423')}}")
+                                window.open("{{url('nota')}}/"+data.notrans); 
                                 location.reload();
                             } else if (result.isDenied) {
                                 Swal.fire("Selesai", "", "success")
@@ -147,9 +146,9 @@
                 const harga = parseFloat(data.harga);
                 const id = parseInt(data.id);
 
-                if (orderedList.every(list => list.id !== id)) {
+                if (orderedList.every(list => list.menu_id !== id)) {
                     let dataN = {
-                        'id': id,
+                        'menu_id': id,
                         'menu': menu_clicked,
                         'harga': harga,
                         'qty': 1

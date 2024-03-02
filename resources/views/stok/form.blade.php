@@ -13,14 +13,22 @@
                       <div id="method">
 
                       </div>
-                      {{-- Menu Id --}}
+                      
+                      {{-- menu id --}}
                       <div class="form-group row">
-                          <label for="staticEmail" class="col-sm-4 col-form-label">Menu Id</label>
-                          <div class="col-sm-12">
-                              <input type="text" class="form-control" id="menu_id" name="menu_id"
-                                  placeholder="Menu Id">
-                          </div>
-                      </div>
+                        <label for="staticEmail" class="col-sm-4 col-form-label">Menu Id</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" name="menu_id" id="menu_id"
+                                placeholder="Menu Id">
+                                <option value="">Pilih Menu</option>
+                                @foreach ($menu as $m)
+                                <option value="{{$m->id}}">{{$m->nama_menu}}</option>
+                                    
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                       {{-- Jumlah --}}
                       <div class="form-group row">
                         <label for="staticEmail" class="col-sm-4 col-form-label">Jumlah</label>

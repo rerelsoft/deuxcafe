@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
+use App\Models\DetailTransaksi;
 use App\Http\Requests\TransaksiRequest;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -16,7 +17,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+       //
     }
 
     /**
@@ -33,6 +34,8 @@ class TransaksiController extends Controller
     public function store(TransaksiRequest $request)
     {
         try {
+            DB::beginTransaction();
+
             $datePrefix = date('Ymd');
             $lastTransaction = Transaksi::where('id', 'like', $datePrefix.'%')->orderBy('id', 'desc')->first();
             $lastIdNumber = $lastTransaction ? intval(substr($lastTransaction->id, 8)) : 0;
@@ -44,11 +47,28 @@ class TransaksiController extends Controller
                 'tanggal' => date('Y-m-d'),
                 'total_harga' => $request->total,
                 'metode_pembayaran' => 'cash',
-                'keterangan' => '',
+                'keterangan' => 'success',
             ]);
+            if (!$insertTransaksi->exists) return 'error';
+
+            // input detail transaksi
+            foreach ($request->orderedList as $detail) {
+                $insertDetailTransaksi = DetailTransaksi::create([
+                    'transaksi_id' => $notrans,
+                    'menu_id' => $detail['menu_id'],
+                    'jumlah' => $detail['qty'],
+                    'subtotal' => $detail['harga'] = $detail['qty'],
+                ]);
+            }
+            DB::commit();
+
+            return response()->json(['status' => true, 'message' => 'pemesanan berhasil','notrans'=>$notrans]);
         } catch (Exception | QueryException | PDOException $e) {
+            dd($e);
+            return response()->json(['status' => false, 'message' => 'pemesanan gagal']);
             return $e; // Note: Returning $e directly might not be a good practice for production environments due to security concerns.
             // Db::rollback(); // This line will not execute due to the return statement above it.
+            DB::rollback();
         }
         return $insertTransaksi;
         
@@ -56,9 +76,17 @@ class TransaksiController extends Controller
     }
 
     public function faktur($nofaktur) {
-        $data = Transaksi::where('id', $nofaktur)->with(['detailTransaksi'])->first();
+        try {
+        $data['transaksi'] = Transaksi::where('id', $nofaktur)->with(['detailTransaksi' => function
+         ($query){
+            $query->with('menu');
+         }])->first();
+             return view('cetak.faktur')->with($data);
+        } catch (Exception | QueryException | PDOException $e) {
+            return response()->json(['status' => false, 'message' => 'pemesanan gagal']);
 
-        dd($data);
+        }
+
     }
 
     /**

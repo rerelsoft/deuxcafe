@@ -22,7 +22,21 @@ class TransaksiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // 'id' => '',
+            // 'tanggal' => '',
+            // 'total_harga' => '',
+            // 'metode_pembayaran' => '',
+            // 'keterangan' => '',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'id.required' => 'Data belum diisi!',
+            'tanggal.required' => 'Data belum diisi!',
+            'total_harga.required' => 'Data belum diisi!',
+            'metode_pembayaran.required' => 'Data belum diisi!',
+            'keterangan.required' => 'Data belum diisi!',
         ];
     }
 }

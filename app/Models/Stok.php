@@ -11,4 +11,8 @@ class Stok extends Model
     
     protected $table = 'stok';
     protected $fillable = ['menu_id', 'jumlah'];
+
+    public function menu() {
+        return $this->belongsTo(Menu::class, 'menu_id');
+    }
 }

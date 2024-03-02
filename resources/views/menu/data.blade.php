@@ -20,7 +20,7 @@
             <td>{{$m->nama_menu}}</td>
             <td>{{$m->harga}}</td>
             <td>{{$m->deskripsi}}</td>
-            <td>{{$m->type_id}}</td>
+            <td>{{$m->type->nama_type}}</td>
             <td>
             {{-- ########### edit ########## --}}
               <button class="btn bg-gradient-success"data-bs-toggle="modal" data-bs-target="#modalFormMenu" data-mode="edit" 

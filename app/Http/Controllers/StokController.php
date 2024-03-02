@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Menu;
 use App\Models\Stok;
 use App\Http\Requests\StoreStokRequest;
 use App\Http\Requests\UpdateStokRequest;
@@ -21,9 +21,10 @@ class StokController extends Controller
         $data['stok'] = Stok::where('id', auth()->user()->id)->get();
       
         $stok = Stok::all();
+        $menu = Menu::all();
 
 
-        return view('stok.index', compact('stok'));
+        return view('stok.index', compact('stok'), compact('menu'));
     }
 
     /**
