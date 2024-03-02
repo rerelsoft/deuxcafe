@@ -9,7 +9,7 @@ use App\Http\Requests\UpdateTypeRequest;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TypeExport;
-
+use App\Imports\TypeImport;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
@@ -95,5 +95,12 @@ class TypeController extends Controller
     public function exportData(){
         $filename = date('Y-m-d').'_type.xlsx';
         return Excel::download(new TypeExport, $filename);
+    }
+
+    public function upload(Request $request)
+    {
+        Excel::import(new TypeImport, $request->data_type);
+
+        return redirect('type') -> with('success', 'Delete data berhasil!');
     }
 }

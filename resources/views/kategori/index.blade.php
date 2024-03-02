@@ -11,19 +11,21 @@
                     <div class="p-3 py-2">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormKategori">
-                          <i class="fa fa-plus"></i> Tambah Kategori
+                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal"
+                            data-bs-target="#modalFormKategori">
+                            <i class="fa fa-plus"></i> Tambah Kategori
                         </button>
 
-                          <!-- Button Export -->
-                          <a href="{{ route('export-kategori') }}" class="btn bg-success text-white">
-                          <i class="fa fa-file-excel"></i>  Export
-                          </a>
+                        <!-- Button Export -->
+                        <a href="{{ route('export-kategori') }}" class="btn bg-success text-white">
+                            <i class="fa fa-file-excel"></i> Export
+                        </a>
 
-                           <!-- Button Import -->
-                        <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#formImport">
+                        <!-- Button Import -->
+                        <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal"
+                            data-bs-target="#formImport">
                             <i class="fa fa-file-excel"></i> Import
-                          </button>
+                        </button>
 
                     </div>
 
@@ -40,7 +42,6 @@
 
     @include('layouts.footers.auth.footer')
     </div>
-
 @endsection
 
 @push('js')
@@ -56,13 +57,13 @@
             if (mode === 'edit') {
                 modal.find('.modal-title').text('Edit Kategori')
                 modal.find('#nama').val(nama)
-                modal.find('.modal-body form').attr('action', '{{ url("kategori") }}/' + id)
+                modal.find('.modal-body form').attr('action', '{{ url('kategori') }}/' + id)
                 modal.find('#method').html('@method('PATCH')')
             } else {
                 modal.find('.modal-title').text('Input Kategori')
                 modal.find('#nama_type').val('')
                 modal.find('#method').html('')
-                modal.find('.modal-body form').attr('action', '{{ url("kategori") }}')
+                modal.find('.modal-body form').attr('action', '{{ url('kategori') }}')
             }
         })
 

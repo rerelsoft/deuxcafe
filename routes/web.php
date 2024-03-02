@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// export and import type
 	Route::get('export/type', [TypeController::class, 'exportData'])->name('export-type');
+	Route::post('uploadtype', [TypeController::class, 'upload']);
 
 	// export and import menu
 	Route::get('export/menu', [MenuController::class, 'exportData'])->name('export-menu');

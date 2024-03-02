@@ -11,14 +11,22 @@
                     <div class="p-3 py-2">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormType">
+                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal"
+                            data-bs-target="#modalFormType">
                             Tambah Type
                         </button>
 
-                         <!-- Button Export -->
-                         <a href="{{ route('export-type') }}" class="btn bg-success text-white">
-                            <i class="fa fa-file-excel"></i>  Export
-                            </a>
+                        <!-- Button Export -->
+                        <a href="{{ route('export-type') }}" class="btn bg-success text-white">
+                            <i class="fa fa-file-excel"></i> Export
+                        </a>
+
+                        <!-- Button Import -->
+                        <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal"
+                            data-bs-target="#formImport">
+                            <i class="fa fa-file-excel"></i> Import
+                        </button>
+                        
                     </div>
 
                     @include('type.data')
@@ -34,7 +42,6 @@
 
     @include('layouts.footers.auth.footer')
     </div>
-
 @endsection
 
 @push('js')
