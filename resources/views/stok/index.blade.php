@@ -20,6 +20,12 @@
                             <i class="fa fa-file-excel"></i>  Export
                         </a>
 
+                         <!-- Button Import -->
+                        <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal"
+                        data-bs-target="#formImport">
+                        <i class="fa fa-file-excel"></i> Import
+                        </button>
+
                     </div>
 
                     @include('stok.data')

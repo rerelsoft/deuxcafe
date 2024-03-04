@@ -11,14 +11,21 @@
                     <div class="p-3 py-2">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormMenu">
+                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal"
+                            data-bs-target="#modalFormMenu">
                             Tambah Menu
                         </button>
 
-                         <!-- Button Export -->
+                        <!-- Button Export -->
                         <a href="{{ route('export-menu') }}" class="btn bg-success text-white">
-                            <i class="fa fa-file-excel"></i>  Export
+                            <i class="fa fa-file-excel"></i> Export
                         </a>
+
+                        <!-- Button Import -->
+                        <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal"
+                            data-bs-target="#formImport">
+                            <i class="fa fa-file-excel"></i> Import
+                        </button>
 
                     </div>
 
@@ -31,7 +38,7 @@
         </div>
 
     </div>
-@include('menu.form')
+    @include('menu.form')
 
     @include('layouts.footers.auth.footer')
     </div>
@@ -57,7 +64,7 @@
                 modal.find('#deskripsi').val(deskripsi)
                 modal.find('#type_id').val(type_id)
 
-                modal.find('.modal-body form').attr('action', '{{ url("menu") }}/' + id)
+                modal.find('.modal-body form').attr('action', '{{ url('menu') }}/' + id)
                 modal.find('#method').html('@method('PATCH')')
             } else {
                 modal.find('.modal-title').text('Input Menu')
@@ -66,7 +73,7 @@
                 modal.find('#deskripsi').val('')
                 modal.find('#type_id').val('')
                 modal.find('#method').html('')
-                modal.find('.modal-body form').attr('action', '{{ url("menu") }}')
+                modal.find('.modal-body form').attr('action', '{{ url('menu') }}')
             }
         })
 

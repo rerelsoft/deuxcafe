@@ -7,7 +7,7 @@ use App\Http\Requests\StorePelangganRequest;
 use App\Http\Requests\UpdatePelangganRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PelangganExport;
-
+use App\Imports\PelangganImport;
 use Illuminate\Http\Request;
 
 class PelangganController extends Controller
@@ -86,5 +86,12 @@ class PelangganController extends Controller
     public function exportData(){
         $filename = date('Y-m-d').'_pelanggan.xlsx';
         return Excel::download(new PelangganExport, $filename);
+    }
+
+    public function upload(Request $request)
+    {
+        Excel::import(new PelangganImport, $request->data_pelanggan);
+
+        return redirect('pelanggan') -> with('success', 'Delete data berhasil!');
     }
 }

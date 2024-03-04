@@ -67,15 +67,19 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// export and import menu
 	Route::get('export/menu', [MenuController::class, 'exportData'])->name('export-menu');
+	Route::post('uploadmenu', [MenuController::class, 'upload']);
 
 	// export and import stok
 	Route::get('export/stok', [StokController::class, 'exportData'])->name('export-stok');
+	Route::post('uploadstok', [StokController::class, 'upload']);
 
 	// export and import pelanggan
 	Route::get('export/pelanggan', [PelangganController::class, 'exportData'])->name('export-pelanggan');
+	Route::post('uploadpelanggan', [PelangganController::class, 'upload']);
 
 	// export and import meja
 	Route::get('export/meja', [MejaController::class, 'exportData'])->name('export-meja');
+	Route::post('uploadmeja', [MejaController::class, 'upload']);
 
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');

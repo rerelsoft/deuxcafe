@@ -7,7 +7,7 @@ use App\Http\Requests\StoreStokRequest;
 use App\Http\Requests\UpdateStokRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StokExport;
-
+use App\Imports\StokImport;
 use Illuminate\Http\Request;
 
 class StokController extends Controller
@@ -87,5 +87,12 @@ class StokController extends Controller
     public function exportData(){
         $filename = date('Y-m-d').'_stok.xlsx';
         return Excel::download(new StokExport, $filename);
+    }
+
+    public function upload(Request $request)
+    {
+        Excel::import(new StokImport, $request->data_stok);
+
+        return redirect('stok') -> with('success', 'Delete data berhasil!');
     }
 }

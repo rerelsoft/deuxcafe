@@ -7,7 +7,7 @@ use App\Http\Requests\StoreMejaRequest;
 use App\Http\Requests\UpdateMejaRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\MejaExport;
-
+use App\Imports\MejaImport;
 use Illuminate\Http\Request;
 
 class MejaController extends Controller
@@ -84,5 +84,12 @@ class MejaController extends Controller
     public function exportData(){
         $filename = date('Y-m-d').'_meja.xlsx';
         return Excel::download(new MejaExport, $filename);
+    }
+
+    public function upload(Request $request)
+    {
+        Excel::import(new MejaImport, $request->data_meja);
+
+        return redirect('meja') -> with('success', 'Delete data berhasil!');
     }
 }

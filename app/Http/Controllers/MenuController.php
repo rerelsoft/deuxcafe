@@ -8,7 +8,7 @@ use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\MenuExport;
-
+use App\Imports\MenuImport;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -86,5 +86,12 @@ class MenuController extends Controller
     public function exportData(){
         $filename = date('Y-m-d').'_menu.xlsx';
         return Excel::download(new MenuExport, $filename);
+    }
+
+    public function upload(Request $request)
+    {
+        Excel::import(new MenuImport, $request->data_menu);
+
+        return redirect('menu') -> with('success', 'Delete data berhasil!');
     }
 }
