@@ -11,7 +11,7 @@ class UpdateProdukTitipanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,23 @@ class UpdateProdukTitipanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama_produk' => 'required',
+            'nama_supplier' => 'required',
+            'harga_beli' => 'required',
+            'harga_jual' => 'required',
+            'stok' => 'required',
+            'keterangan' => 'required'
         ];
     }
+    // public function messages()
+    // {
+    //     return [
+    //         'nama_produk.required' => 'Data nama produk belum diisi!',
+    //         'nama_supplier.required' => 'Data email produk belum diisi!',
+    //         'harga_beli.required' => 'Data nomor telepon produk belum diisi!',
+    //         'harga_jual.required' => 'Data alamat produk belum diisi!',
+    //         'stok.required' => 'Data alamat produk belum diisi!',
+    //         'keterangan.required' => 'Data alamat produk belum diisi!',
+    //     ];
+    // }
 }

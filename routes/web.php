@@ -10,6 +10,8 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\MejaController;
 use App\Http\Controllers\TentangController;
+use App\Http\Controllers\ProdukTitipanController;
+use App\Http\Controllers\TitipanController;
 
 
 
@@ -57,6 +59,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('stok', StokController::class);
 	Route::resource('meja', MejaController::class);
 	Route::resource('tentang', TentangController::class);
+	Route::resource('produk', ProdukTitipanController::class);
+	Route::resource('titipan', TitipanController::class);
 	Route::get('nota/{nofaktur}', [TransaksiController::class, 'faktur']);
 
 	// export and import kategori
@@ -82,6 +86,10 @@ Route::group(['middleware' => 'auth'], function () {
 	// export and import meja
 	Route::get('export/meja', [MejaController::class, 'exportData'])->name('export-meja');
 	Route::post('uploadmeja', [MejaController::class, 'upload']);
+
+	// export and import titipan
+	Route::get('export/titipan', [TitipanController::class, 'exportData'])->name('export-titipan');
+	Route::post('uploadtitipan', [TitipanController::class, 'upload']);
 
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');

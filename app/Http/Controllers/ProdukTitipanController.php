@@ -13,7 +13,10 @@ class ProdukTitipanController extends Controller
      */
     public function index()
     {
-        //
+        $data['produkTitipan'] = ProdukTitipan::where('id', auth()->user()->id)->get();
+        $produkTitipan = ProdukTitipan::all();
+
+        return view('produk.index', compact('produkTitipan'));
     }
 
     /**
@@ -29,7 +32,11 @@ class ProdukTitipanController extends Controller
      */
     public function store(StoreProdukTitipanRequest $request)
     {
-        //
+        $request['id'] = auth()->user()->id;
+
+        $input = ProdukTitipan::create($request->all());
+
+        return redirect(request()->segment(1).'/')->with('succes', 'Input data berhasi');
     }
 
     /**
@@ -53,7 +60,11 @@ class ProdukTitipanController extends Controller
      */
     public function update(UpdateProdukTitipanRequest $request, ProdukTitipan $produkTitipan)
     {
-        //
+        $validated=$request->validated();
+        
+        $produkTitipan->update($validated);
+        
+        return redirect() -> route('produk.index') -> with('success', 'Update data berhasil');
     }
 
     /**
@@ -61,6 +72,8 @@ class ProdukTitipanController extends Controller
      */
     public function destroy(ProdukTitipan $produkTitipan)
     {
-        //
+        $produkTitipan->delete();
+
+        return redirect('produk') -> with('success', 'Delete data berhasil!');
     }
 }
