@@ -9,6 +9,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\MejaController;
+use App\Http\Controllers\TentangController;
 
 
 
@@ -55,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('pelanggan', PelangganController::class);
 	Route::resource('stok', StokController::class);
 	Route::resource('meja', MejaController::class);
+	Route::resource('tentang', TentangController::class);
 	Route::get('nota/{nofaktur}', [TransaksiController::class, 'faktur']);
 
 	// export and import kategori
