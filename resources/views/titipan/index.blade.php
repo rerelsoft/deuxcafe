@@ -11,21 +11,25 @@
                     <div class="p-3 py-2">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormTitipan">
+                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal"
+                            data-bs-target="#modalFormTitipan">
                             Tambah Titipan
                         </button>
 
-                         <!-- Button Export -->
-                         <a href="{{ route('export-titipan') }}" class="btn bg-success text-white">
-                            <i class="fa fa-file-excel"></i>  Export
+                        <!-- Button Export -->
+                        <a href="{{ route('export-titipan') }}" class="btn bg-success text-white">
+                            <i class="fa fa-file-excel"></i> Export
                         </a>
-
+                        <!-- Button Export -->
+                        <a href="{{ route('download-pdf') }}" class="btn bg-success text-white">
+                            <i class="fa fa-file-excel"></i> Export
+                        </a>    
                         <!-- Button Import -->
                         <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal"
                             data-bs-target="#formImportTitipan">
                             <i class="fa fa-file-excel"></i> Import
                         </button>
-                        
+
                     </div>
 
                     @include('titipan.data')
@@ -41,7 +45,6 @@
 
     @include('layouts.footers.auth.footer')
     </div>
-
 @endsection
 
 @push('js')
@@ -68,7 +71,7 @@
                 modal.find('#stok').val(stok)
                 modal.find('#keterangan').val(keterangan)
 
-                modal.find('.modal-body form').attr('action', '{{ url("titipan") }}/' + id)
+                modal.find('.modal-body form').attr('action', '{{ url('titipan') }}/' + id)
                 modal.find('#method').html('@method('PATCH')')
             } else {
                 modal.find('.modal-title').text('Input Titipan')
@@ -79,7 +82,7 @@
                 modal.find('#stok').val('')
                 modal.find('#keterangan ').val('')
                 modal.find('#method').html('')
-                modal.find('.modal-body form').attr('action', '{{ url("titipan") }}')
+                modal.find('.modal-body form').attr('action', '{{ url('titipan') }}')
             }
         })
 
@@ -102,11 +105,61 @@
             })
         })
 
+
+
         document.getElementById('harga_beli').addEventListener('input', function() {
-                 let hargaBeli = parseFloat(this.value);
-                 let hargaJual = Math.ceil((hargaBeli * 1.7) / 500) * 500;
-                 document.getElementById('harga_jual').value = hargaJual.toFixed(2);
-             });
+            let hargaBeli = parseFloat(this.value);
+            let hargaJual = Math.ceil((hargaBeli * 1.7) / 500) * 500;
+            document.getElementById('harga_jual').value = hargaJual.toFixed(2);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listener for double-clicking
+            document.querySelectorAll('.stok-input').forEach(function(input) {
+                input.addEventListener('dblclick', function() {
+                    this.type = 'text'; // Change to text field for editing
+                    this.focus(); // Focus on the input for immediate editing
+                });
+            });
+
+            // Add event listener for pressing Enter
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    let activeElement = document.activeElement;
+                    if (activeElement.classList.contains('stok-input')) {
+                        event.preventDefault(); // Prevent form submission if inside a form
+                        activeElement.blur(); // Remove focus to trigger update
+                        // Here you would typically send the updated value to the server
+                        console.log('Update stok to:', activeElement.value);
+                    }
+                }
+            });
+        });
+
+        // Inside the 'keydown' event listener where you check for Enter
+        if (event.key === 'Enter') {
+            // Your existing code...
+            fetch('/update-stok', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Include CSRF token if using Laravel's CSRF protection
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        stok: activeElement.value,
+                        id: activeElement.id.split('-')[1]
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Stok updated successfully:', data);
+                    // Optionally, update the UI to reflect the change
+                })
+                .catch(error => {
+                    console.error('Error updating stok:', error);
+                });
+        }
     </script>
 
     <script>

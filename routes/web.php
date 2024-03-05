@@ -91,6 +91,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('export/titipan', [TitipanController::class, 'exportData'])->name('export-titipan');
 	Route::post('uploadtitipan', [TitipanController::class, 'upload']);
 
+	// download pdf
+	Route::get('download-pdf', 'TitipanController@downloadPDF')->name('download-pdf');
+
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
 	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static'); 

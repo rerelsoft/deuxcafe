@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TitipanExport;
 use App\Imports\TitipanImport;
 use Illuminate\Http\Request;
+use PDF;
 
 class TitipanController extends Controller
 {
@@ -18,7 +19,7 @@ class TitipanController extends Controller
     public function index()
     {
         $data['titipan'] = Titipan::where('id', auth()->user()->id)->get();
-      
+
         $titipan = Titipan::all();
         // $kategori = Kategori::all();
 
@@ -31,7 +32,6 @@ class TitipanController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -43,7 +43,7 @@ class TitipanController extends Controller
 
         $input = Titipan::create($request->all());
 
-        return redirect(request()->segment(1).'/')->with('succes', 'Input data berhasi');
+        return redirect(request()->segment(1) . '/')->with('succes', 'Input data berhasi');
     }
 
     /**
@@ -67,10 +67,10 @@ class TitipanController extends Controller
      */
     public function update(UpdateTitipanRequest $request, Titipan $titipan)
     {
-        $validated=$request->validated();
+        $validated = $request->validated();
         $titipan->update($validated);
 
-        return redirect() -> route('titipan.index') -> with('success', 'Update data berhasil');
+        return redirect()->route('titipan.index')->with('success', 'Update data berhasil');
     }
 
     /**
@@ -80,10 +80,11 @@ class TitipanController extends Controller
     {
         $titipan->delete();
 
-        return redirect('titipan') -> with('success', 'Delete data berhasil!');
+        return redirect('titipan')->with('success', 'Delete data berhasil!');
     }
-    public function exportData(){
-        $filename = date('Y-m-d').'_titipan.xlsx';
+    public function exportData()
+    {
+        $filename = date('Y-m-d') . '_titipan.xlsx';
         return Excel::download(new TitipanExport, $filename);
     }
 
@@ -91,6 +92,24 @@ class TitipanController extends Controller
     {
         Excel::import(new TitipanImport, $request->data_titipan);
 
-        return redirect('titipan') -> with('success', 'Delete data berhasil!');
+        return redirect('titipan')->with('success', 'Delete data berhasil!');
+    }
+
+    public function downloadPDF()
+    {
+        $titipan = Titipan::all();
+
+        // Generate the PDF
+        $pdf = PDF::loadView('pdf.titipan', ['titipan' => $titipan])
+            ->setPaper('a4', 'portrait');
+
+        // Save the PDF to a temporary file
+        $tempPath = tempnam(sys_get_temp_dir(), 'pdf');
+        file_put_contents($tempPath, $pdf->output());
+
+        // Return the PDF as a downloadable file
+        return response()->download($tempPath, 'titipan.pdf', [
+            'Content-Type' => 'application/pdf',
+        ]);
     }
 }

@@ -11,19 +11,22 @@
                     <div class="p-3 py-2">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#modalFormStok">
+                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal"
+                            data-bs-target="#modalFormStok">
                             Tambah Stok
                         </button>
 
                         <!-- Button Export -->
                         <a href="{{ route('export-stok') }}" class="btn bg-success text-white">
-                            <i class="fa fa-file-excel"></i>  Export
+                            <i class="fa fa-file-excel"></i> Export
                         </a>
 
-                         <!-- Button Import -->
+                       
+
+                        <!-- Button Import -->
                         <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal"
-                        data-bs-target="#formImport">
-                        <i class="fa fa-file-excel"></i> Import
+                            data-bs-target="#formImport">
+                            <i class="fa fa-file-excel"></i> Import
                         </button>
 
                     </div>
@@ -41,7 +44,6 @@
 
     @include('layouts.footers.auth.footer')
     </div>
-
 @endsection
 
 @push('js')
@@ -52,7 +54,7 @@
             const mode = btn.data('mode')
             const menu_id = btn.data('menu_id')
             const jumlah = btn.data('jumlah')
-           
+
 
             const id = btn.data('id')
             const modal = $(this)
@@ -60,17 +62,17 @@
                 modal.find('.modal-title').text('Edit Stok')
                 modal.find('#menu_id').val(menu_id)
                 modal.find('#jumlah').val(jumlah)
-               
 
-                modal.find('.modal-body form').attr('action', '{{ url("stok") }}/' + id)
+
+                modal.find('.modal-body form').attr('action', '{{ url('stok') }}/' + id)
                 modal.find('#method').html('@method('PATCH')')
             } else {
                 modal.find('.modal-title').text('Input Stok')
                 modal.find('#menu_id').val('')
                 modal.find('#jumlah').val('')
-              
+
                 modal.find('#method').html('')
-                modal.find('.modal-body form').attr('action', '{{ url("stok") }}')
+                modal.find('.modal-body form').attr('action', '{{ url('stok') }}')
             }
         })
 

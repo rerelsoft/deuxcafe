@@ -23,7 +23,7 @@
         <td>{{$t->nama_supplier}}</td>
         <td>{{$t->harga_beli}}</td>
         <td>{{$t->harga_jual}}</td>
-        <td>{{$t->stok}}</td>
+        <td><input type="number" value="{{$t->stok}}" class="p-20 stok-input" id="stok-{{$t->id}}"></td>
         <td>{{$t->keterangan}}</td>
         <td>
         {{-- ########### edit ########## --}}
