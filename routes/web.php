@@ -90,9 +90,8 @@ Route::group(['middleware' => 'auth'], function () {
 	// export and import titipan
 	Route::get('export/titipan', [TitipanController::class, 'exportData'])->name('export-titipan');
 	Route::post('uploadtitipan', [TitipanController::class, 'upload']);
-
 	// download pdf
-	Route::get('download-pdf', 'TitipanController@downloadPDF')->name('download-pdf');
+	route::get('generate/titipan', [TitipanController::class, 'downloadPdf'])->name('exportPdf_titipan');
 
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');

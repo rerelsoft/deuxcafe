@@ -20,10 +20,13 @@
                         <a href="{{ route('export-titipan') }}" class="btn bg-success text-white">
                             <i class="fa fa-file-excel"></i> Export
                         </a>
-                        <!-- Button Export -->
-                        <a href="{{ route('download-pdf') }}" class="btn bg-success text-white">
-                            <i class="fa fa-file-excel"></i> Export
-                        </a>    
+
+                        {{-- pdf --}}
+                        <a href="{{ route('exportPdf_titipan') }}" class="btn btn-danger">
+                            <i class="fa fa-file-pdf"></i>
+                            Export PDF
+                        </a>
+
                         <!-- Button Import -->
                         <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal"
                             data-bs-target="#formImportTitipan">

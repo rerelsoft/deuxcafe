@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TitipanExport;
 use App\Imports\TitipanImport;
 use Illuminate\Http\Request;
+
 use PDF;
 
 class TitipanController extends Controller
@@ -95,21 +96,9 @@ class TitipanController extends Controller
         return redirect('titipan')->with('success', 'Delete data berhasil!');
     }
 
-    public function downloadPDF()
-    {
-        $titipan = Titipan::all();
-
-        // Generate the PDF
-        $pdf = PDF::loadView('pdf.titipan', ['titipan' => $titipan])
-            ->setPaper('a4', 'portrait');
-
-        // Save the PDF to a temporary file
-        $tempPath = tempnam(sys_get_temp_dir(), 'pdf');
-        file_put_contents($tempPath, $pdf->output());
-
-        // Return the PDF as a downloadable file
-        return response()->download($tempPath, 'titipan.pdf', [
-            'Content-Type' => 'application/pdf',
-        ]);
+    public function downloadPdf(){
+        $data['titipan']=Titipan::get();
+        $pdf = Pdf::loadView('titipan.pdf_view',$data);
+        return $pdf->stream('');
     }
 }
