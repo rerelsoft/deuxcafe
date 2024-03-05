@@ -102,15 +102,9 @@
             })
         })
 
-        // Membuat event listener untuk input harga beli
         document.getElementById('harga_beli').addEventListener('input', function() {
-                 // Mendapatkan nilai harga beli
                  let hargaBeli = parseFloat(this.value);
-
-                 // Menghitung harga jual dengan keuntungan 70% dan pembulatan 500
                  let hargaJual = Math.ceil((hargaBeli * 1.7) / 500) * 500;
-
-                 // Memasukkan nilai pada input harga jual
                  document.getElementById('harga_jual').value = hargaJual.toFixed(2);
              });
     </script>
