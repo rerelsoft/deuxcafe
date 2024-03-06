@@ -9,15 +9,22 @@
                 <div class="card">
                     <h5 class="card-header">Tentang Aplikasi</h5>
                     <div class="p-3 py-2">
+                        <img class="d-center" src="./img/download.jpg" alt="">
+                        <p>
+                        Aplikasi digital marketing telah menjadi alat penting dalam dunia bisnis online, memungkinkan pelaku bisnis untuk menjangkau audiens secara lebih luas dan memperkuat brand equity mereka. Dengan berbagai fitur yang disediakan, seperti pelacakan deal, tiket, dan tugas, serta optimasi fitur WhatsApp Business dan Instagram API, aplikasi ini menawarkan solusi komprehensif untuk meningkatkan efisiensi bisnis. Selain itu, layanan pelanggan dan chatbot AI menyediakan dukungan real-time untuk memenuhi kebutuhan pelanggan, meningkatkan kepuasan dan loyalitas mereka. Aplikasi Omnichannel CRM berbasis cloud, seperti Mekari Qontak, menjadi pilihan utama di Indonesia untuk memacu pertumbuhan bisnis, dengan fitur yang mendukung pengelolaan layanan pesan, sales CRM, dan customer service, serta integrasi dengan berbagai platform seperti WhatsApp Business dan Instagram. Dengan kemampuan untuk otomatisasi penjualan dan layanan pelanggan, aplikasi ini membantu bisnis dalam mencapai tujuan pemasaran mereka dengan lebih efisien dan efektif. Mekari Qontak, sebagai salah satu penyedia aplikasi marketing terbaik di Indonesia, menawarkan solusi yang dipercaya oleh lebih dari 3000+ perusahaan, memastikan keamanan informasi data pelanggan melalui sertifikasi ISO 27001. Dengan fitur canggih dan integrasi yang kuat, aplikasi digital marketing seperti Mekari Qontak menawarkan solusi yang dapat diandalkan untuk meningkatkan pertumbuhan bisnis online
+
+                    </p>
+                </div>
+                <h5 class="card-header">Tentang Aplikasi</h5>
+                    <div class="p-3 py-2">
+                        <img class="d-center" src="./img/download.jpg" alt="">
                         <p>
                         Aplikasi digital marketing telah menjadi alat penting dalam dunia bisnis online, memungkinkan pelaku bisnis untuk menjangkau audiens secara lebih luas dan memperkuat brand equity mereka. Dengan berbagai fitur yang disediakan, seperti pelacakan deal, tiket, dan tugas, serta optimasi fitur WhatsApp Business dan Instagram API, aplikasi ini menawarkan solusi komprehensif untuk meningkatkan efisiensi bisnis. Selain itu, layanan pelanggan dan chatbot AI menyediakan dukungan real-time untuk memenuhi kebutuhan pelanggan, meningkatkan kepuasan dan loyalitas mereka. Aplikasi Omnichannel CRM berbasis cloud, seperti Mekari Qontak, menjadi pilihan utama di Indonesia untuk memacu pertumbuhan bisnis, dengan fitur yang mendukung pengelolaan layanan pesan, sales CRM, dan customer service, serta integrasi dengan berbagai platform seperti WhatsApp Business dan Instagram. Dengan kemampuan untuk otomatisasi penjualan dan layanan pelanggan, aplikasi ini membantu bisnis dalam mencapai tujuan pemasaran mereka dengan lebih efisien dan efektif. Mekari Qontak, sebagai salah satu penyedia aplikasi marketing terbaik di Indonesia, menawarkan solusi yang dipercaya oleh lebih dari 3000+ perusahaan, memastikan keamanan informasi data pelanggan melalui sertifikasi ISO 27001. Dengan fitur canggih dan integrasi yang kuat, aplikasi digital marketing seperti Mekari Qontak menawarkan solusi yang dapat diandalkan untuk meningkatkan pertumbuhan bisnis online
 
                     </p>
                 </div>
             </div>
-
         </div>
-
     </div>
   
 

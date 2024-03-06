@@ -52,7 +52,7 @@ class MenuExport implements FromCollection, withHeadings, WithEvents
 
             $event->sheet->insertNewRowBefore(1, 2);
             $event->sheet->mergeCells('A1:G1');
-            $event->sheet->setCellValue('A1', 'Data Kategori');
+            $event->sheet->setCellValue('A1', 'Data Menu');
             $event->sheet->getStyle('A1')->getFont()->setBold(true);
             $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 

@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Events\BeforeExport;
 use Maatwebsite\Excel\Events\AfterSheet;
 use \Maatwebsite\Excel\Sheet;
 
-class StokExport implements FromCollection
+class StokExport implements FromCollection, withHeadings, WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -50,7 +50,7 @@ class StokExport implements FromCollection
 
             $event->sheet->insertNewRowBefore(1, 2);
             $event->sheet->mergeCells('A1:E1');
-            $event->sheet->setCellValue('A1', 'Data Kategori');
+            $event->sheet->setCellValue('A1', 'Data Stok');
             $event->sheet->getStyle('A1')->getFont()->setBold(true);
             $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 

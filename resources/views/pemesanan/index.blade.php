@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'pemesanan'])
     <div class="row mt-4 p-3">
-        <div class="container col-md-8">
+        <div class="container col-md-8">c
             <div class="card item menu">
                 <h5 class="card-header">Menu</h5>
                 {{-- nama pelanggan --}}

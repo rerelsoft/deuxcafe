@@ -112,7 +112,7 @@
 
         document.getElementById('harga_beli').addEventListener('input', function() {
             let hargaBeli = parseFloat(this.value);
-            let hargaJual = Math.ceil((hargaBeli * 1.7) / 500) * 500;
+            let hargaJual = Math.ceil((hargaBeli * 1.5) / 500) * 500;
             document.getElementById('harga_jual').value = hargaJual.toFixed(2);
         });
 
