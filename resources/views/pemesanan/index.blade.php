@@ -19,13 +19,27 @@
                     </div>
                 </div>
                 {{-- menu --}}
+
+
                 <div class="p-4">
+
+                    <div class="card bg-gradient-success" style="width: 150px; height: 150px; ">
+                        <div class="card-body  text-white">
+                            <h5 class="card-title text-center  text-white">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted text-center">Stok :</h6>
+                            <li class="btn bg-gradient-warning" style="width: 100px; height: 30%; ">Add Stock</li>
+
+                        </div>
+                    </div>
+
                     @foreach ($type as $t)
                         <h3>{{ $t->nama_type }}</h3>
                         <ul class="menu-item">
                             @foreach ($t->menu as $menu)
-                                <li class="btn bg-gradient-warning" data-harga="{{ $menu->harga }}"
-                                    data-id="{{ $menu->id }}">{{ $menu->nama_menu }}</li>
+                                <li class="btn bg-gradient-warning" style="height: 60px;" data-harga="{{ $menu->harga }}"
+                                    data-id="{{ $menu->id }}">{{ $menu->nama_menu }}
+                                    <h6 class="card-subtitle mb-2 text-muted text-center">Stok :</h6>
+                                </li>
                             @endforeach
                         </ul>
                     @endforeach
